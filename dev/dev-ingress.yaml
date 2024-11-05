@@ -27,16 +27,16 @@ metadata:
 spec:
   ingressClassName: aws-ingress-class
   rules:
-    - host: kibana.yoram-izilov.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: kibana-service
-                port:
-                  number: 5601
+    # - host: kibana.yoram-izilov.com
+    #   http:
+    #     paths:
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: kibana-service
+    #             port:
+    #               number: 5601
     - host: argo.yoram-izilov.com
       http:
         paths:
