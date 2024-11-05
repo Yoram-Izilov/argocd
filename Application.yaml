@@ -75,6 +75,7 @@ spec:
   sources:
     - chart: kube-prometheus-stack 
       repoURL: https://prometheus-community.github.io/helm-charts     
+      targetRevision: "latest"
       helm:
         valueFiles:
         - $values_repo/values/prometheus-values.yaml
@@ -102,6 +103,7 @@ spec:
   sources:
     - chart: elasticsearch 
       repoURL: https://helm.elastic.co    
+      targetRevision: "latest"
       helm:
         valueFiles:
         - $values_repo/values/elastic-values.yaml
@@ -129,6 +131,7 @@ spec:
   sources:
     - chart: fluent-bit 
       repoURL: https://fluent.github.io/helm-charts   
+      targetRevision: "latest"
       helm:
         valueFiles:
         - $values_repo/values/fluentbit-values.yaml  
@@ -144,4 +147,4 @@ spec:
     automated:
       prune: true
       selfHeal: true
----
+
