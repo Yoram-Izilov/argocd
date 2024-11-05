@@ -4,4 +4,4 @@ metadata:
   name: kibana-service
 spec:
   type: ExternalName
-  externalName: kibana-kibana.logging
+  externalName: kibana-kibana.logging.svc.cluster.local
