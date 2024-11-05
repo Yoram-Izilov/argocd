@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-ingress
+  name: dev-ingress
   labels:
-    app: nginx
+    app: dev
   annotations:
     # Load Balancer Name
-    alb.ingress.kubernetes.io/load-balancer-name: carmel-yoram-lb-ingress
+    alb.ingress.kubernetes.io/load-balancer-name: carmel-yoram-dev
     # Ingress Core Settings
     alb.ingress.kubernetes.io/scheme: internet-facing
     # Health Check Settings
@@ -29,6 +29,6 @@ spec:
   ingressClassName: aws-ingress-class
   defaultBackend:
     service:
-      name: nginx-service
+      name: dev-service
       port:
         number: 80
