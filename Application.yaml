@@ -140,6 +140,13 @@ spec:
       helm:
         valueFiles:
         - $values_repo/values/elastic-values.yaml
+        parameters:
+          - name: replicas
+            value: "2"
+          - name: volumeClaimTemplate.storageClassName
+            value: "gp2"
+          - name: persistence.labels.enabled
+            value: "true"
     - repoURL: https://github.com/Yoram-Izilov/argocd.git
       targetRevision: HEAD
       ref: values_repo
@@ -149,6 +156,7 @@ spec:
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
+    - Replace=true
     automated:
       prune: true
       selfHeal: true
