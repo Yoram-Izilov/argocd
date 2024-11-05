@@ -26,29 +26,28 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: kibana-kibana.logging.svc.cluster.local
-                namespace: logging
+                name: kibana-service
                 port:
                   number: 5601
-    - host: argo.yoram-izilov.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: argocd-server.logging.svc.cluster.local
-                namespace: argocd
-                port:
-                  number: 80
-    - host: grafana.yoram-izilov.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: monitoring-grafana.logging.svc.cluster.local
-                namespace: monitoring
-                port:
-                  number: 80
+    # - host: argo.yoram-izilov.com
+    #   http:
+    #     paths:
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: argocd-server.logging.svc.cluster.local
+    #             namespace: argocd
+    #             port:
+    #               number: 80
+    # - host: grafana.yoram-izilov.com
+    #   http:
+    #     paths:
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: monitoring-grafana.logging.svc.cluster.local
+    #             namespace: monitoring
+    #             port:
+    #               number: 80
