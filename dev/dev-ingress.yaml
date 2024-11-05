@@ -21,14 +21,43 @@ metadata:
     alb.ingress.kubernetes.io/subnets: subnet-0e52f2831206e0ac1,subnet-08a4531e265a47e89
     # SSL Settings
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:992382545251:certificate/1f50a0c6-9c42-4b7b-896a-d8681820cf94
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:992382545251:certificate/fe576a42-3b76-4aba-9ad3-33253d8e3f3e
     alb.ingress.kubernetes.io/ssl-redirect: '443'
     # External DNS - For creating a Record Set in Route53
-    external-dns.alpha.kubernetes.io/hostname: status-page.yoram-izilov.com
+    external-dns.alpha.kubernetes.io/hostname: kibana.yoram-izilov.com, grafana.yoram-izilov.com, argo.yoram-izilov.com
 spec:
   ingressClassName: aws-ingress-class
-  defaultBackend:
-    service:
-      name: dev-service
-      port:
-        number: 80
+  rules:
+    - host: kibana.yoram-izilov.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kibana-kibana
+                namespace: logging
+                port:
+                  number: 5601
+    - host: argo.yoram-izilov.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server
+                namespace: argocd
+                port:
+                  number: 80
+    - host: grafana.yoram-izilov.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: monitoring-grafana
+                namespace: monitoring
+                port:
+                  number: 80
