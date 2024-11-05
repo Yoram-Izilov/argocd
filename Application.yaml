@@ -1,8 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Repository
+metadata:
+  name: prometheus-community
+  namespace: argocd
+spec:
+  type: helm
+  url: https://prometheus-community.github.io/helm-charts
+  name: prometheus-community
+  insecure: true  # Set to true if the repo is not using HTTPS
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Repository
+metadata:
+  name: elastic-helm-charts
+  namespace: argocd
+spec:
+  type: helm
+  url: https://helm.elastic.co
+  name: elastic-helm-charts
+  insecure: true  # Set to true if the repo is not using HTTPS
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Repository
+metadata:
+  name: fluent-bit
+  namespace: argocd
+spec:
+  type: helm
+  url: https://fluent.github.io/helm-charts
+  name: fluent-bit
+  insecure: true  # Set to true if the repo is not using HTTPS
+---
 # The DNS and ALB files
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: wsgi-app
+  name: resources
   namespace: argocd
 spec:
   project: default
@@ -138,6 +171,28 @@ spec:
     - repoURL: https://github.com/Yoram-Izilov/argocd.git
       targetRevision: HEAD
       ref: values_repo
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: logging
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+---
+# kibana
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kibana
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - chart: kibana 
+      repoURL: https://helm.elastic.co  
+      targetRevision: "latest"
   destination:
     server: https://kubernetes.default.svc
     namespace: logging
