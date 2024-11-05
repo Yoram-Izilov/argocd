@@ -1,3 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana-service
+spec:
+  type: ExternalName
+  externalName: kibana-kibana.logging.svc.cluster.local
+---  
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -29,25 +37,23 @@ spec:
                 name: kibana-service
                 port:
                   number: 5601
-    # - host: argo.yoram-izilov.com
-    #   http:
-    #     paths:
-    #       - path: /
-    #         pathType: Prefix
-    #         backend:
-    #           service:
-    #             name: argocd-server.logging.svc.cluster.local
-    #             namespace: argocd
-    #             port:
-    #               number: 80
-    # - host: grafana.yoram-izilov.com
-    #   http:
-    #     paths:
-    #       - path: /
-    #         pathType: Prefix
-    #         backend:
-    #           service:
-    #             name: monitoring-grafana.logging.svc.cluster.local
-    #             namespace: monitoring
-    #             port:
-    #               number: 80
+    - host: argo.yoram-izilov.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server.argocd.svc.cluster.local
+                port:
+                  number: 80
+    - host: grafana.yoram-izilov.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: monitoring-grafana.monitoring.svc.cluster.local
+                port:
+                  number: 80
