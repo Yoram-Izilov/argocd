@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: wsgi
-          image: 992382545251.dkr.ecr.us-east-1.amazonaws.com/yoram-carmel-status-page/wsgi:latest
+          image: 992382545251.dkr.ecr.us-east-1.amazonaws.com/yoram-carmel-status-page/wsgi:9-9
           imagePullPolicy: Always
           ports:
             - containerPort: 8001
