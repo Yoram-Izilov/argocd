@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: 992382545251.dkr.ecr.us-east-1.amazonaws.com/yoram-carmel-status-page/nginx:10-10
+          image: 992382545251.dkr.ecr.us-east-1.amazonaws.com/yoram-carmel-status-page/nginx:11-11
           imagePullPolicy: Always
           ports:
             - containerPort: 80
