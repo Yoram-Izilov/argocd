@@ -9,14 +9,10 @@ metadata:
     # Ingress Core Settings
     alb.ingress.kubernetes.io/scheme: internet-facing
     # Health Check Settings
+    alb.ingress.kubernetes.io/healthcheck-path: /api/status
+    alb.ingress.kubernetes.io/healthcheck-port: '5601'  # Match the Kibana service port
     alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
-    alb.ingress.kubernetes.io/healthcheck-port: '80'
-    alb.ingress.kubernetes.io/healthcheck-path: /api/health
-    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15'
-    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '5'
-    alb.ingress.kubernetes.io/success-codes: '200'
-    alb.ingress.kubernetes.io/healthy-threshold-count: '2'
-    alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/success-codes: '200-399' 
     alb.ingress.kubernetes.io/subnets: subnet-079d2db8dbbf45582,subnet-0d787a2d112f5c0ef
     # SSL Settings
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
