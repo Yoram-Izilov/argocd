@@ -1,3 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana-kibana-nodeport
+  namespace: logging
+spec:
+  type: NodePort
+  ports:
+    - port: 5601               
+      targetPort: 5601
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: kibana
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -8,15 +22,6 @@ metadata:
     alb.ingress.kubernetes.io/load-balancer-name: kibana-lb-ingress
     # Ingress Core Settings
     alb.ingress.kubernetes.io/scheme: internet-facing
-    # Health Check Settings
-    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
-    alb.ingress.kubernetes.io/healthcheck-port: '80'
-    alb.ingress.kubernetes.io/healthcheck-path: /api/status
-    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15'
-    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '5'
-    alb.ingress.kubernetes.io/success-codes: '200'
-    alb.ingress.kubernetes.io/healthy-threshold-count: '2'
-    alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
     alb.ingress.kubernetes.io/subnets: subnet-079d2db8dbbf45582,subnet-0d787a2d112f5c0ef
     # SSL Settings
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
@@ -28,6 +33,6 @@ spec:
   ingressClassName: aws-ingress-class
   defaultBackend:
     service:
-      name: kibana-kibana
+      name: kibana-kibana-nodeport
       port:
         number: 5601
