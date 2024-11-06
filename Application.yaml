@@ -4,7 +4,7 @@ kind: Application
 metadata:
   name: resources
   namespace: argocd
-spec:
+spec: 
   project: default
   source:
     repoURL: https://github.com/Yoram-Izilov/argocd.git
